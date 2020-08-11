@@ -4,7 +4,7 @@ import { Button, Input,FormControl,InputLabel } from '@material-ui/core';
 import Message from './Message';
 import db from './firebase';
 import firebase from 'firebase'
-
+import FlipMove from 'react-flip-move';
 
 function App() {
   const [input,setInput]=useState('');
@@ -53,17 +53,19 @@ const sendMessage=(event) =>{
         </FormControl> 
       </form>
     {/*messages themselves*/}
-
-        {
-          messages.map(({id,message})=> (
-            <Message
-            key={id}
-            username={username}
-            message={message}
-            />
-          )
-        )}
-     
+      <FlipMove>
+      {
+        messages.map(({id,message})=> (
+          <Message
+          key={id}
+          username={username}
+          message={message}
+          />
+        )
+      )}
+   
+      </FlipMove>
+        
      
     </div>
   );
