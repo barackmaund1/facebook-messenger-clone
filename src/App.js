@@ -5,6 +5,7 @@ import Message from './Message';
 import db from './firebase';
 import firebase from 'firebase'
 
+
 function App() {
   const [input,setInput]=useState('');
   const [messages,setMessages]=useState([]);
@@ -20,10 +21,9 @@ function App() {
 
  useEffect(() => {
    //run once when app component loads
-   db.collection('messages')
-   .orderBy('timestamp','desc')
-   .onSnapshot(snapshot =>{
-     setMessages(snapshot.docs.map(doc=>doc.data()))
+   db.collection('messages').orderBy('timestamp','desc')
+.onSnapshot(snapshot =>{
+     setMessages(snapshot.docs.map(doc =>({id:doc.id,message:doc.data()})))
    })
    
  }, []) 
@@ -35,7 +35,7 @@ const sendMessage=(event) =>{
     db.collection('messages').add({
       message:input,
       username:username,
-      timestamp:firebase.firestore.FieldValue.serverTimestamp()
+      timestamp:firebase.firestore.FieldValue.serverTimestamp(),
     })
 
     setMessages([...messages,{username:username,message:input}]);
@@ -53,15 +53,17 @@ const sendMessage=(event) =>{
         </FormControl> 
       </form>
     {/*messages themselves*/}
-     {
-       messages.map( message => (
-         <Message
-         username={username}
-         message={message}
-         />
-       
-       )
-      )}
+
+        {
+          messages.map(({id,message})=> (
+            <Message
+            key={id}
+            username={username}
+            message={message}
+            />
+          )
+        )}
+     
      
     </div>
   );
