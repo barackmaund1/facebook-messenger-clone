@@ -19,3 +19,13 @@
  justify-content: center;
  margin:20px ;
 }
+.app__formControl{
+  display: flex !important;
+  flex-direction: row !important;
+}
+.app__IconButton{
+  flex:0 !important;
+}
+.app__Input{
+  flex: 1 !important;
+}

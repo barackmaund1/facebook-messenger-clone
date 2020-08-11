@@ -1,6 +1,6 @@
 import React ,{ useState,useEffect }from 'react';
 import './App.css';
-import { Button, Input,FormControl,InputLabel } from '@material-ui/core';
+import { Input,FormControl } from '@material-ui/core';
 import Message from './Message';
 import db from './firebase';
 import firebase from 'firebase'
@@ -48,12 +48,13 @@ const sendMessage=(event) =>{
     <div className="App">
     <img className='App__image' src={Messenger}/>
      <h1>Hello clever programmer 🚀 </h1>
+     <h3>Facebook Messenger 💘 </h3>
      <h2>Welcome {username}</h2>
      <form className='App__form'> 
-      <FormControl>
-        <InputLabel>Enter a message...</InputLabel>
-        <Input value={input} onChange={event => setInput(event.target.value)} />
-        <IconButton disabled={!Input} variant='contained' color='primary' type='submit' onClick={sendMessage}
+      <FormControl className='app__formControl'>
+        
+        <Input className='app__Input' placeholder='Enter a message....' value={input} onChange={event => setInput(event.target.value)} />
+        <IconButton  className='app__IconButton' disabled={!Input} variant='contained' color='primary' type='submit' onClick={sendMessage}
         >
            <SendIcon/>
         </IconButton>
